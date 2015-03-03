@@ -1,0 +1,133 @@
+"Story":
+	You play as Merkules.  He was adventuring in the high seas when out of seemingly nowhere, 
+	his ship is destroyed.  Fortunately, he meets Megami the mergirl who gives him both spears
+	for the sharks and the ability to breath underwater.  Upon reaching the beach, he finds 
+	the dying Sir Imerton, a dragoon who was on a quest to save the last dragoon soul from the
+	keep of Lord Raucent, a legendary dragoon himself.  Sir Imerton was shanked by the thief 
+	Ryse in his quest for shinies kept at the keep.  With his dying breath, Sir Imerton gives 
+	Merkules the axe of Anthon the Great, who was thought to have died in the galkan resistance, 
+	and tasks him with protecting the dragoon soul. In the next level, Merkules must contend
+	with the clones of Ryse, left behind to cover his tracks.  Upon reaching the castle, Merkules
+	finds the dragoon soul and is granted the ability to fly.  The Archmage Sonderon greets him
+	and grants him the ability to use a fireball because "it only seems fitting for a dragon".
+	In the third stage, Merkules must contend with the bard, Fara, who has been tasked with
+	protecting the castle from intruders. 
+	Upon death, Merkules can offer up a ginger cookie to Terabera, a healer who then revives him.
+	
+	"Easter egg": while making game a funny glitch happened with the movement of "decoration fishie",
+		which was maintained in both the splash screen (fish flipping across the screen) and in level 1
+		there is a fish which falls down a set of tiles (all other fish swim back and forth). This fish
+		is named Sir Fishington IV.
+	
+Description:
+	General:
+		Player has 3 lives (can die 4 times before game over), represented as "ginger cookies"
+		Player has 70 hit points (when hit at 0 player dies and loses a life)
+			HP is represented as a single ginger cookie, player consumes one part to restore health
+			when hit and so icon loses a chunk when hit (hence why a life uses one cookie upon respawn:
+			player has eaten all of the current cookie)
+		Current weapon, hp, and number of lives are displayed in the upper right corner of the screen
+		Score is based upon number of kills and number of deaths.
+			Each kill (regardless of enemy type or method) adds 100 points to score
+			Each player death subtracts 50 points from score
+		Players and enemies all animated using sprite sheets.
+		Box2D is used for movement (adding forces/impulses for weapons/player/enemies) and collision detection.
+		Controls: listed specifically for each level below but in general:
+			Tab: Cycle through available weapons
+				press, not hold
+			X: fire/use current weapon
+				press, not hold
+			Spacebar: jump (while jumping: transition to flying (level3 only))
+				press, not hold
+			Shift: run/fly faster (hold to transition from walking to running)
+				hold, not press
+			Arrow keys: move player up/down and left/right
+				hold, not press: if not held, player will come to a stop if not falling
+		All levels have a camera which follows the player
+	Overworld:
+		Changes based upon which level has been recently cleared.
+		Level 1 Cleared: Sir Imerton appears and gives Merkules axe of Anthon the Great
+			Player can only enter Level2 (using a levelexit trigger located at the tree)
+		Level 2 Cleared: Archmage Sonderon appears and gives Merkules the ability to use fireball
+			Player can only enter Level3 (using a levelexit trigger located at the winged castle)
+		Level 3 Cleared: 
+			Player can revisit any level (using levelexit triggers located at Start, Tree, Winged Castle)
+		Controls:
+			Arrow Keys: move player (Merkules's head) around the map
+		No enemies.
+	Level 1:
+		An underwater level
+		Enemies: Sharks
+			Sharks merely swim back and forth and the player must avoid them or kill them.
+			Player takes 10 points of damage if hit by shark.
+			Sharks have 9 hp.
+		Weapons: Throwing spears
+			Causes 3 points of damage to shark (3 hits to kill)
+		Animations for main char: swimming
+		Controls:
+			Arrow keys: movement
+			X: use weapon (throw spear)
+		Level end: when player hits level exit tile at the end of level (surrounded by coral at far right of level)
+	Level 2:
+		A forest level
+		Enemies: Ryse clones (ninjas with throwing knives)
+			Ryse clones are set to start/stop throwing knives using triggers placed throughout the level
+			Player takes 10 points of damage if hit by throwing dagger or Ryse clone itself
+			Has 9 hp.
+		Weapons: Axe, throwing spears
+			Both axe and spear cause 3 points of damage to Ryse clone (3 hits to kill)
+			Axe is a melee weapon
+			Throwing spear is a projectile weapon
+		Animations for main char: running, walking, jumping, swinging, falling, climbing
+			For climbing, there are triggers to set the top 2 tiles for the ladder as solid or not.
+				This allows the player to be able to run over the ladder without losing momentum 
+				as well as allowing him to pass through the tiles when climbing on the ladder.
+			Swinging: currently broken (2/26/15)
+		Controls:
+			Spacebar: jump
+			X: use weapon (swing axe, throw spear)
+			Tab: cycle through weapons
+			Running/Walking/Falling/Swinging:
+				Left/Right Arrows: move left and right
+				>Cannot use weapon when swinging<
+				While running/walking and over a ladder, up/down arrows transition the player to climbing mode
+				Hold shift while walking to transition to running
+			Climbing:
+				Up/Down Arrows: move up and down
+		Level end: when player hits level exit tile at the end of level (after swinging jump, far right of level)
+		>>This level uses parallax for the forest background<<
+	Level 3:
+		A castle level
+		Enemies: Faras (bards with throwing knives/bow and arrow)
+			Fara starts/stops throwing her projectiles when the player passes through triggers placed 
+			throughout the level
+			Player takes 10 points of damage if hit by throwing dagger/arrow.
+			Has 9 hp.
+		Weapons: fireball (projectile) and talons (can hit Fara and take her hat, killing her)
+			Fireball hits Fara for 3 points of damage (3 hits to kill)
+			Using talons to grab Fara's hat instantly kills her
+		Animations for main char: running, walking, jumping, falling, flying
+		Controls:
+			Spacebar: jump, while jumping: transitions to flying
+			X: use weapon (throw fireball)
+			Tab: cycle through weapons
+			Left/Right Arrows: move left and right
+				Hold shift while walking to transition to running
+			Flying:
+				Up/Down Arrows: move up/down
+		Level end: when player hits level exit tile at the end of level (middle of bottom section near tower)
+		
+		
+Sprites:
+	Done by Brandon Merkley:
+		SelfSprite (Fara), Player Sprite (Merkules), Enemies (Shark, Ryse Clones(ninjas), Fara (bards)), overworld tiles,
+		'decoration fishie', coral, talons, dragon wings, friendly sprites (Terabera, Anthon)
+	Done by myself:
+		Sir Imerton (based on Kain from FF4, recolored to a dark purple and added beard)
+		Archmage Sonderon (based on black mage from FF1, recolored to red and added fireball)
+		Fireball, Axe, Throwing Dagger, Spears, ocean/forest/castle tiles, background for ocean/forest/castle 
+		
+	Self sprite is based on my FFXIV character, picture (FILE) is saved as part of project.
+	Documentation for spriting also attached. I tried to maintain a record of the process as a lot of the spriting
+		was done over skype using screenshare during the process (after I sent Brandon initial designs)
+		

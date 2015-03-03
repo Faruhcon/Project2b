@@ -1,0 +1,35 @@
+3 Levels:
+	Level 1 = Underwater level
+	Level 2 = Forest level
+	Level 3 = Castle level
+	Parallax: used in level 2 for forest background
+	Camera: in all levels, the camera follows the player
+Splash Screen:
+	Is it descriptive?
+	
+Sprite - Main Character: Merkules
+	Running: Level 2/3
+	Falling: Level 2/3
+	Jumping: Level 2/3
+	Swimming: Level 1
+	Flying: Level 3
+	Climbing: Level 2
+	Swinging: Level 2
+Sprite - Friendly:
+	Terabera: revives player
+	Sir Imerton: gives axe
+	Archmage Sonderon: gives fireball
+Sprite - Enemy:
+	Shark: Level 1
+	Ryse Clone/ninja: Level 2
+	Fara/bard: Level 3
+Sprite - Self:
+	Fara, enemy for level 3
+3 Types of Attack:
+	Projectiles: Fireball/throwing spears
+	Melee: Axe
+	Flying: talons
+Player Attributes:
+	Number of lives: displayed at top left of screen
+	Health: displayed at top left of screen
+Documentation:
