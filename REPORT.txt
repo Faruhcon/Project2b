@@ -12,6 +12,7 @@
 	and grants him the ability to use a fireball because "it only seems fitting for a dragon".
 	In the third stage, Merkules must contend with the bard, Fara, who has been tasked with
 	protecting the castle from intruders. 
+	
 	Upon death, Merkules can offer up a ginger cookie to Terabera, a healer who then revives him.
 	
 	"Easter egg": while making game a funny glitch happened with the movement of "decoration fishie",
@@ -20,18 +21,31 @@
 		is named Sir Fishington IV.
 	
 Description:
+	DevMode:
+		Pressing X at the start screen loads a developer's overworld which grants access to dev levels of levels1-3 (which return to this dev overworld),
+			a demo level which show all the animations and weapons except swimming, a rope demo level, and access to the main game's level1
+			DevLevel1 = Under Fishie
+			DevLevel2 = Under Tree
+			DevLevel3 = Under Winged Castle
+			DevLevelDemo = Under Tree+Winged Castle
+				This level adds Fara enemies to level2 and allows player to fly and gives access to all weapons
+			RopeDemoLevel = only start without anything nearby
+			MainGameLevel1 = Beside Megami the Mergirl
+	NormalMode:
+		Pressing Space at the start screen loads the main game level
+
 	General:
 		Player has 3 lives (can die 4 times before game over), represented as "ginger cookies"
 		Player has 70 hit points (when hit at 0 player dies and loses a life)
 			HP is represented as a single ginger cookie, player consumes one part to restore health
 			when hit and so icon loses a chunk when hit (hence why a life uses one cookie upon respawn:
 			player has eaten all of the current cookie)
-		Current weapon, hp, and number of lives are displayed in the upper right corner of the screen
+		Current weapon, hp, and number of lives are displayed in the upper left corner of the screen
 		Score is based upon number of kills and number of deaths.
 			Each kill (regardless of enemy type or method) adds 100 points to score
 			Each player death subtracts 50 points from score
 		Players and enemies all animated using sprite sheets.
-		Box2D is used for movement (adding forces/impulses for weapons/player/enemies) and collision detection.
+		Box2D is used for movement (adding forces/impulses for weapons/player/enemies), collision detection, and the rope.
 		Controls: listed specifically for each level below but in general:
 			Tab: Cycle through available weapons
 				press, not hold
@@ -44,8 +58,10 @@ Description:
 			Arrow keys: move player up/down and left/right
 				hold, not press: if not held, player will come to a stop if not falling
 		All levels have a camera which follows the player
+		
 	Overworld:
 		Changes based upon which level has been recently cleared.
+		No Levels Cleared: Megami appears and gives Merkules spears and the ability to breathe underwater
 		Level 1 Cleared: Sir Imerton appears and gives Merkules axe of Anthon the Great
 			Player can only enter Level2 (using a levelexit trigger located at the tree)
 		Level 2 Cleared: Archmage Sonderon appears and gives Merkules the ability to use fireball
@@ -55,6 +71,7 @@ Description:
 		Controls:
 			Arrow Keys: move player (Merkules's head) around the map
 		No enemies.
+		
 	Level 1:
 		An underwater level
 		Enemies: Sharks
@@ -68,6 +85,8 @@ Description:
 			Arrow keys: movement
 			X: use weapon (throw spear)
 		Level end: when player hits level exit tile at the end of level (surrounded by coral at far right of level)
+		'Friendly': Fishies. All but 1 swim back and forth and do not harm player. The other is the easter egg fish which rolls.
+	
 	Level 2:
 		A forest level
 		Enemies: Ryse clones (ninjas with throwing knives)
@@ -82,13 +101,15 @@ Description:
 			For climbing, there are triggers to set the top 2 tiles for the ladder as solid or not.
 				This allows the player to be able to run over the ladder without losing momentum 
 				as well as allowing him to pass through the tiles when climbing on the ladder.
-			Swinging: currently broken (2/26/15)
+			Swinging: uses a trigger to send the player off of the rope. Once player hits trigger, he flies off rope
+				In case of emergency, use jump to get off of rope as well.  But the ideal is to let the rope/trigger handle it.
 		Controls:
 			Spacebar: jump
 			X: use weapon (swing axe, throw spear)
 			Tab: cycle through weapons
 			Running/Walking/Falling/Swinging:
 				Left/Right Arrows: move left and right
+				Space: Jump
 				>Cannot use weapon when swinging<
 				While running/walking and over a ladder, up/down arrows transition the player to climbing mode
 				Hold shift while walking to transition to running
@@ -96,6 +117,7 @@ Description:
 				Up/Down Arrows: move up and down
 		Level end: when player hits level exit tile at the end of level (after swinging jump, far right of level)
 		>>This level uses parallax for the forest background<<
+		
 	Level 3:
 		A castle level
 		Enemies: Faras (bards with throwing knives/bow and arrow)
@@ -115,19 +137,24 @@ Description:
 				Hold shift while walking to transition to running
 			Flying:
 				Up/Down Arrows: move up/down
+				
+			Press Space while jumping or falling to enter flying mode
+			
 		Level end: when player hits level exit tile at the end of level (middle of bottom section near tower)
 		
 		
 Sprites:
 	Done by Brandon Merkley:
 		SelfSprite (Fara), Player Sprite (Merkules), Enemies (Shark, Ryse Clones(ninjas), Fara (bards)), overworld tiles,
-		'decoration fishie', coral, talons, dragon wings, friendly sprites (Terabera, Anthon)
+		'decoration fishie', coral, talons, dragon wings, friendly sprites (Terabera,Fishie), background for castle
 	Done by myself:
 		Sir Imerton (based on Kain from FF4, recolored to a dark purple and added beard)
 		Archmage Sonderon (based on black mage from FF1, recolored to red and added fireball)
-		Fireball, Axe, Throwing Dagger, Spears, ocean/forest/castle tiles, background for ocean/forest/castle 
+		Fireball, Axe, Throwing Dagger, Spears, ocean/forest/castle tiles, background for ocean/forest
+		
+	Megami the Mergirl was a joint venture.  I did the base sprite and Brandon added shading.
 		
 	Self sprite is based on my FFXIV character, picture (FILE) is saved as part of project.
 	Documentation for spriting also attached. I tried to maintain a record of the process as a lot of the spriting
-		was done over skype using screenshare during the process (after I sent Brandon initial designs)
+		was done over skype using screenshare during the process (after I sent Brandon initial designs). 
 		
