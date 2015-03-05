@@ -1,30 +1,60 @@
 3 Levels:
 	Level 1 = Underwater level
+		Features: 1 weapon (projectile = spears), 
+				  1 enemy (Sharks/MuttBuncher),	
+				  1 friendly (fishies),
+				  1 animation (swimming),
+				  Camera following player
 	Level 2 = Forest level
+		Features: 2 Weapons (melee = axe, projectile = spears),
+				  1 enemy (Ninjas/RyseClone),
+				  6 animations (running, walking, jumping, climbing, swinging, and falling),
+				  Camera following player,
+				  Parallax for background 
 	Level 3 = Castle level
+		Features: 2 Weapons (projectile = fireball, melee = talons),
+				  1 enemy (Bards/Fara),
+				  5 animations (running, walking, jumping, falling, flying),
+				  Camera following player,
+				  Contains the self sprite (Fara - enemy sprite)
+	Overworlds = Access main game levels and show "npcs"
+		Features: 4 'Friendlies' overtime(Megami the Mergirl, Sir Imerton, Archmage Sonderon, Terabera)
+	Game Over screen features a Friendly Sprite (Terabera)
 	Parallax: used in level 2 for forest background
 	Camera: in all levels, the camera follows the player
+	All levels use Box2D.
+	As well controls are displayed at the bottom of the screen throughout the game.
+	3 attributes are displayed in top left corner of screen in every level
+		Health: ginger cookies which is eaten as player gets hit
+		Lives: also ginger cookies, once all health is lost another is consumed to continue playing
+		Current Weapon: shows sprite for current weapon (spear, axe, fireball, or talons)
 Splash Screen:
-	Is it descriptive?
+	Start up screen: displays controls for game
+	Between level: shows score and stats for previous level
+	Game Over: shows final score for game
 	
 Sprite - Main Character: Merkules
-	Running: Level 2/3
-	Falling: Level 2/3
-	Jumping: Level 2/3
+	Running: Level 2/3/DevLevelDemo
+	Falling: Level 2/3/DevLevelDemo
+	Jumping: Level 2/3/DevLevelDemo
 	Swimming: Level 1
-	Flying: Level 3
-	Climbing: Level 2
-	Swinging: Level 2
+	Flying: Level 3/DevLevelDemo
+	Climbing: Level 2/DevLevelDemo
+	Swinging: Level 2/DevLevelDemo
 Sprite - Friendly:
 	Terabera: revives player
+	Megami the Mergirl: gives spears and ability to breathe underwater
 	Sir Imerton: gives axe
 	Archmage Sonderon: gives fireball
+	Fishie: is awesome
 Sprite - Enemy:
 	Shark: Level 1
-	Ryse Clone/ninja: Level 2
-	Fara/bard: Level 3
+	Ryse Clone/ninja: Level 2/DevLevelDemo
+	Fara/bard: Level 3/DevLevelDemo
 Sprite - Self:
-	Fara, enemy for level 3
+	Fara, enemy for level 3/DevLevelDemo
+	Based on my FFXIV character
+		Pictures included as part of project at: project2/Screenshots/ffxiv_02232015_035108.png and project2/Screenshots/ffxiv_02232015_035112.png
 3 Types of Attack:
 	Projectiles: Fireball/throwing spears
 	Melee: Axe
@@ -32,4 +62,5 @@ Sprite - Self:
 Player Attributes:
 	Number of lives: displayed at top left of screen
 	Health: displayed at top left of screen
-Documentation:
+	Weapon: displayed at top left of screen
+Demo: http://faruhcon.github.io/Project2b/ (it should just run, at least it has for me and my friends)

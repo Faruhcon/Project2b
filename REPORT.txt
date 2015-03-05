@@ -19,22 +19,43 @@
 		which was maintained in both the splash screen (fish flipping across the screen) and in level 1
 		there is a fish which falls down a set of tiles (all other fish swim back and forth). This fish
 		is named Sir Fishington IV.
+		Also, shooting the other fish in level1 will cause them to spin and no longer move in their default path.
+			This is not a bug, it was left as is because I found it amusing and thought others would too.
+		As well, the fish can die but they have 9999 health and player can only cause 3 damage/hit. So, have fun.
 	
 Description:
 	DevMode:
-		Pressing X at the start screen loads a developer's overworld which grants access to dev levels of levels1-3 (which return to this dev overworld),
+		Pressing X at the start screen loads a developer's overworld which grants access to dev levels of levels1-3 (which return to this dev overworld, otherwise same as main game),
 			a demo level which show all the animations and weapons except swimming, a rope demo level, and access to the main game's level1
 			DevLevel1 = Under Fishie
 			DevLevel2 = Under Tree
 			DevLevel3 = Under Winged Castle
 			DevLevelDemo = Under Tree+Winged Castle
 				This level adds Fara enemies to level2 and allows player to fly and gives access to all weapons
+				As well there is an additional level exit at the bottom at the far right of the screen where the normal exit is.
+					This was added in case the rope glitched out. To reach this level exit, fall down where the rope is and hit the wall on the far right.
 			RopeDemoLevel = only start without anything nearby
 			MainGameLevel1 = Beside Megami the Mergirl
+			
+		Note: to quickly see all of the player animations/weapons, visit DevLevel1 for swimming and	DevLevelDemo for everything else.
+		Beyond this point, the rest of this report is focused on the "NormalMode"/main game sequence.
+		
 	NormalMode:
 		Pressing Space at the start screen loads the main game level
 
 	General:
+		Controls: listed specifically for each level below but in general:
+			Tab: Cycle through available weapons
+				press, not hold
+			C: fire/use current weapon
+				press, not hold
+			Spacebar: jump (while jumping: transition to flying (level3 only))
+				press, not hold
+			Shift: run/fly faster (hold to transition from walking to running)
+				hold, not press
+			Arrow keys: move player up/down and left/right
+				hold, not press: if not held, player will come to a stop if not falling
+	
 		Player has 3 lives (can die 4 times before game over), represented as "ginger cookies"
 		Player has 70 hit points (when hit at 0 player dies and loses a life)
 			HP is represented as a single ginger cookie, player consumes one part to restore health
@@ -44,33 +65,51 @@ Description:
 		Score is based upon number of kills and number of deaths.
 			Each kill (regardless of enemy type or method) adds 100 points to score
 			Each player death subtracts 50 points from score
-		Players and enemies all animated using sprite sheets.
+		Players and enemies all animated using sprite sheets (except the splash screens)
 		Box2D is used for movement (adding forces/impulses for weapons/player/enemies), collision detection, and the rope.
-		Controls: listed specifically for each level below but in general:
-			Tab: Cycle through available weapons
-				press, not hold
-			X: fire/use current weapon
-				press, not hold
-			Spacebar: jump (while jumping: transition to flying (level3 only))
-				press, not hold
-			Shift: run/fly faster (hold to transition from walking to running)
-				hold, not press
-			Arrow keys: move player up/down and left/right
-				hold, not press: if not held, player will come to a stop if not falling
 		All levels have a camera which follows the player
 		
+		Note for Level2/DevLevel2/DevLevelDemo: the rope I got working by setting the player's .isSensor to true (allowing him to pass through colliders)
+			This means that the player can potentially go through the ceiling and out beyond the level.  If this happens, the top right of the game (near the rope)
+			has tiles which will allow the player to pass down into the main game again.
+			As well, if the player get stuck on the rope and does not swing off (swinging off is triggered by a trigger near the rope), jumping should fix the issue.
+		Weapons: 
+			Spears/Axe/Fireball can damage everything.
+				Note in Level1, shooting the fish will cause them to spin and no longer move in their original paths. This is intentional and kept in for humor.
+				The fish can die but they have a ton of health so it'll take a while.
+				All cause 3 points of damage to enemies/fishies
+			Talons can only damage Fara/Bards in (Dev)Level3 and DevLevelDemo
+				The reasoning is she dies because she lost her hat (source of her power, etc, ask Captain Jack Sparrow).
+				Since the ninjas do not have hats, the talons are not able to damage them.
+				Instantly kills Fara.
+		Enemies: all moves cause 10 points of damage to player
+			Shark: damages player by running into him 
+			Ninja: damages player using throwing daggers
+			Fara/Bard: damages player using throwing daggers and by running into him
+		"NPCs" in the overworld were originally intended to have dialogue but this was cut due to time constraints.
+		Note: There is no "you won" screen, the game is over only when the page is refreshed or all lives are lost.
+			When all lives are lost, Terabera appears and revives the player, allowing him to try again (stats are reset)
+		As well, health is restored to full in between levels.  The only way to get more lives is to get a game over.
+			Attributes (health, weapon, lives) are displayed at the top left of screen.
+	Splash Screens:
+		Start up: Displays controls, shows winged castle, fishie, and Merkules
+		Game over: Shows final score and stats, shows Terabera reviving Merkules
+		Between Level: overlay on top of game, shows stats/score for previous level
 	Overworld:
 		Changes based upon which level has been recently cleared.
 		No Levels Cleared: Megami appears and gives Merkules spears and the ability to breathe underwater
+			Next level trigger is on the starts tile
 		Level 1 Cleared: Sir Imerton appears and gives Merkules axe of Anthon the Great
 			Player can only enter Level2 (using a levelexit trigger located at the tree)
 		Level 2 Cleared: Archmage Sonderon appears and gives Merkules the ability to use fireball
 			Player can only enter Level3 (using a levelexit trigger located at the winged castle)
 		Level 3 Cleared: 
 			Player can revisit any level (using levelexit triggers located at Start, Tree, Winged Castle)
+			Note revisiting levels with force player to replay all levels
+				For example, if player revists level1, he must beat level1 and 2 again before he is able to play level3 again.
 		Controls:
 			Arrow Keys: move player (Merkules's head) around the map
-		No enemies.
+		No enemies (enemies from the game do appear in Overworld3 but they cannot damage the player or each other).
 		
 	Level 1:
 		An underwater level
@@ -83,7 +122,7 @@ Description:
 		Animations for main char: swimming
 		Controls:
 			Arrow keys: movement
-			X: use weapon (throw spear)
+			C: use weapon (throw spear)
 		Level end: when player hits level exit tile at the end of level (surrounded by coral at far right of level)
 		'Friendly': Fishies. All but 1 swim back and forth and do not harm player. The other is the easter egg fish which rolls.
 	
@@ -91,7 +130,7 @@ Description:
 		A forest level
 		Enemies: Ryse clones (ninjas with throwing knives)
 			Ryse clones are set to start/stop throwing knives using triggers placed throughout the level
-			Player takes 10 points of damage if hit by throwing dagger or Ryse clone itself
+			Player takes 10 points of damage if hit by throwing dagger
 			Has 9 hp.
 		Weapons: Axe, throwing spears
 			Both axe and spear cause 3 points of damage to Ryse clone (3 hits to kill)
@@ -105,7 +144,7 @@ Description:
 				In case of emergency, use jump to get off of rope as well.  But the ideal is to let the rope/trigger handle it.
 		Controls:
 			Spacebar: jump
-			X: use weapon (swing axe, throw spear)
+			C: use weapon (swing axe, throw spear)
 			Tab: cycle through weapons
 			Running/Walking/Falling/Swinging:
 				Left/Right Arrows: move left and right
@@ -120,22 +159,23 @@ Description:
 		
 	Level 3:
 		A castle level
-		Enemies: Faras (bards with throwing knives/bow and arrow)
+		Enemies: Faras (bards with throwing knives)
 			Fara starts/stops throwing her projectiles when the player passes through triggers placed 
 			throughout the level
-			Player takes 10 points of damage if hit by throwing dagger/arrow.
+			Player takes 10 points of damage if hit by throwing dagger or Fara herself.
 			Has 9 hp.
 		Weapons: fireball (projectile) and talons (can hit Fara and take her hat, killing her)
 			Fireball hits Fara for 3 points of damage (3 hits to kill)
 			Using talons to grab Fara's hat instantly kills her
+				>> hat only disappears from feet when transitioned out of flying mode or when switching weapons<<
 		Animations for main char: running, walking, jumping, falling, flying
 		Controls:
 			Spacebar: jump, while jumping: transitions to flying
-			X: use weapon (throw fireball)
+			C: use weapon (throw fireball)
 			Tab: cycle through weapons
 			Left/Right Arrows: move left and right
 				Hold shift while walking to transition to running
-			Flying:
+			Flying Only:
 				Up/Down Arrows: move up/down
 				
 			Press Space while jumping or falling to enter flying mode
@@ -150,11 +190,14 @@ Sprites:
 	Done by myself:
 		Sir Imerton (based on Kain from FF4, recolored to a dark purple and added beard)
 		Archmage Sonderon (based on black mage from FF1, recolored to red and added fireball)
-		Fireball, Axe, Throwing Dagger, Spears, ocean/forest/castle tiles, background for ocean/forest
+		Fireball, Axe, Throwing Dagger, Spears, ocean/forest/castle tiles, background for ocean/forest,
+		poof sprite for game over revival, winged castle (although I used Brandon's dragon wings to make it)
 		
 	Megami the Mergirl was a joint venture.  I did the base sprite and Brandon added shading.
 		
-	Self sprite is based on my FFXIV character, picture (FILE) is saved as part of project.
+	Self sprite is based on my FFXIV character
+		Pictures included as part of project at: project2/Screenshots/ffxiv_02232015_035108.png and project2/Screenshots/ffxiv_02232015_035112.png
 	Documentation for spriting also attached. I tried to maintain a record of the process as a lot of the spriting
 		was done over skype using screenshare during the process (after I sent Brandon initial designs). 
+				Pictures scanned using phone (apologies for my handwriting) can be found in the SpriteOutlines folder
 		
